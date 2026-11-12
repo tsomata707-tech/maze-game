@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة 7STAR | تسجيل الدخول واللعب</title>
+    <!-- ربط ملف التصميم -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
+    <header class="header">
+        <div class="user-info">
+            <div class="avatar-wrapper" onclick="document.getElementById('avatarUpload').click()">
+                <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="Avatar" class="user-avatar" id="userAvatar">
+                <span class="edit-icon">✎</span>
+            </div>
+            <input type="file" id="avatarUpload" style="display: none;" accept="image/*">
+            
+            <div class="user-details">
+                <div class="name-wrapper" onclick="editNickname()">
+                    <span class="user-name" id="userName">اسم اللاعب</span>
+                    <span class="edit-icon">✎</span>
+                </div>
+                <span class="user-id" id="userId">ID: 123456</span>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-lang" id="langToggle">EN</button>
+            <button class="btn btn-deposit">إيداع</button>
+            <button class="btn btn-withdraw">سحب</button>
+            <button class="btn btn-logout">خروج</button>
+        </div>
+    </header>
+
+    <main class="game-area">
+        
+        <!-- الشعار مع رابط الصورة الخاص بك -->
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="7STAR Logo" class="game-logo" id="mainLogo">
+        </div>
+
+        <div class="game-screen">
+            <div class="digital-timer" id="timerDisplay">25</div>
+        </div>
+
+        <div class="controls-area">
+            <div class="quick-bets">
+                <button class="btn-oval quick-bet-btn" data-amount="50">50</button>
+                <button class="btn-oval quick-bet-btn" data-amount="200">200</button>
+                <button class="btn-oval quick-bet-btn" data-amount="500">500</button>
+                <button class="btn-oval quick-bet-btn" data-amount="1000">1000</button>
+            </div>
+            <input type="number" class="custom-bet" id="customBetInput" placeholder="أدخل مبلغ الرهان...">
+            <button class="btn-oval btn-start" id="startBtn">START</button>
+        </div>
+
+        <div class="game-buttons-grid" id="gameButtonsGrid">
+            <div class="game-btn" data-index="1"><div class="btn-number">1</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="2"><div class="btn-number">2</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="3"><div class="btn-number">3</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="4"><div class="btn-number">4</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="5"><div class="btn-number">5</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="6"><div class="btn-number">6</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="7"><div class="btn-number">7</div><div class="btn-bet-amount">0</div></div>
+            <div class="game-btn" data-index="8"><div class="btn-number">8</div><div class="btn-bet-amount">0</div></div>
+        </div>
+
+    </main>
+
+    <!-- ربط ملف الجافاسكريبت الأساسي -->
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>
