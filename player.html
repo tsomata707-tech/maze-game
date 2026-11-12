@@ -4,8 +4,278 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لعبة 7STAR | تسجيل الدخول واللعب</title>
-    <!-- ربط ملف التصميم -->
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- تضمين خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- ========================================== -->
+    <!-- 1. كود التصميم (CSS) المدمج -->
+    <!-- ========================================== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* الشعار (Logo) */
+        .logo-container {
+            text-align: center;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 220px; /* تصغير عرض الحاوية */
+        }
+
+        .game-logo {
+            width: 100%;       
+            max-height: 120px; /* تصغير ارتفاع الصورة جداً لتبدو متناسقة */
+            object-fit: contain; 
+            border-radius: 12px;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)); 
+        }
+
+        /* الهيدر العلوي */
+        .header {
+            background: #1e293b;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #334155;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #38bdf8;
+            object-fit: cover;
+        }
+
+        .avatar-wrapper .edit-icon,
+        .name-wrapper .edit-icon {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: #38bdf8;
+            color: #000;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            font-size: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .name-wrapper {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: #38bdf8;
+        }
+
+        .user-id {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 5px 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .btn-lang { background: #8b5cf6; }
+        .btn-deposit { background: #10b981; }
+        .btn-withdraw { background: #ef4444; }
+        .btn-logout { background: #64748b; }
+
+        /* منطقة اللعب */
+        .game-area {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* شاشة اللعب والعداد */
+        .game-screen {
+            width: 100%;
+            max-width: 600px;
+            height: 130px;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 2px dashed #475569;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .digital-timer {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 45px;
+            font-weight: 900;
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+        }
+
+        /* أزرار التحكم */
+        .controls-area {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-bets {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-oval {
+            padding: 6px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, #334155, #1e293b);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        .btn-start {
+            font-size: 18px;
+            padding: 10px 40px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6), inset 0 2px 5px rgba(255,255,255,0.4);
+            margin-top: 5px;
+        }
+
+        .custom-bet {
+            width: 100%;
+            max-width: 250px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* الأزرار الثمانية */
+        .game-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 400px) {
+            .game-buttons-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .game-btn {
+            background: #ef4444;
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            position: relative;
+        }
+
+        .game-btn.active {
+            background: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .game-btn .btn-number {
+            font-size: 18px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+
+        .game-btn .btn-bet-amount {
+            background: #fff;
+            color: #000;
+            border-radius: 20px;
+            padding: 1px 5px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            min-width: 25px;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,19 +285,17 @@
                 <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="Avatar" class="user-avatar" id="userAvatar">
                 <span class="edit-icon">✎</span>
             </div>
-            <input type="file" id="avatarUpload" style="display: none;" accept="image/*">
             
             <div class="user-details">
-                <div class="name-wrapper" onclick="editNickname()">
+                <div class="name-wrapper">
                     <span class="user-name" id="userName">اسم اللاعب</span>
-                    <span class="edit-icon">✎</span>
                 </div>
                 <span class="user-id" id="userId">ID: 123456</span>
             </div>
         </div>
         
         <div class="action-buttons">
-            <button class="btn btn-lang" id="langToggle">EN</button>
+            <button class="btn btn-lang">EN</button>
             <button class="btn btn-deposit">إيداع</button>
             <button class="btn btn-withdraw">سحب</button>
             <button class="btn btn-logout">خروج</button>
@@ -36,9 +304,8 @@
 
     <main class="game-area">
         
-        <!-- الشعار مع رابط الصورة الخاص بك -->
         <div class="logo-container">
-            <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="7STAR Logo" class="game-logo" id="mainLogo">
+            <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="7STAR Logo" class="game-logo">
         </div>
 
         <div class="game-screen">
@@ -69,7 +336,203 @@
 
     </main>
 
-    <!-- ربط ملف الجافاسكريبت الأساسي -->
-    <script type="module" src="js/game.js"></script>
+    <!-- ========================================== -->
+    <!-- 2. كود الجافاسكريبت ومنطق اللعبة (JS) المدمج -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-database.js";
+
+        // إعدادات Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAp-tMO1n8SwnnWr1nXGIWpckALact9UYc",
+            authDomain: "maze-game-7.firebaseapp.com",
+            databaseURL: "https://maze-game-7-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "maze-game-7",
+            storageBucket: "maze-game-7.firebasestorage.app",
+            messagingSenderId: "948688357452",
+            appId: "1:948688357452:web:4f21a537c6d7dfc9244ce9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const GAME = {
+            GAME_CUT: 0.25,
+            POOL_SHARE: 0.75,
+            MULTIPLIER: 2,
+            MIN_BET: 10,
+            ROUND_SECONDS: 25,
+        };
+
+        let currentUser = { id: "TEST123", name: "لاعب تجريبي", balance: 1000 };
+        let currentBets = {};
+        let timerInterval = null;
+        let currentTime = GAME.ROUND_SECONDS;
+        let isRoundActive = false;
+
+        const timerDisplay = document.getElementById('timerDisplay');
+        const gameButtons = document.querySelectorAll('.game-btn');
+        const quickBetBtns = document.querySelectorAll('.quick-bet-btn');
+        const customBetInput = document.getElementById('customBetInput');
+        const startBtn = document.getElementById('startBtn');
+        const userNameDisplay = document.getElementById('userName');
+        const userIdDisplay = document.getElementById('userId');
+
+        function updateTimerDisplay(seconds) {
+            timerDisplay.innerText = seconds;
+            timerDisplay.style.color = (seconds <= 10 && isRoundActive) ? '#ef4444' : '#38bdf8';
+        }
+
+        function resetButtons() {
+            gameButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.querySelector('.btn-bet-amount').innerText = '0';
+                btn.style.boxShadow = "none";
+                btn.style.transform = "scale(1)";
+            });
+            currentBets = {};
+            customBetInput.value = '';
+        }
+
+        function getTotalBet() {
+            return Object.values(currentBets).reduce((a, b) => a + b, 0);
+        }
+
+        gameButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!isRoundActive) {
+                    alert("انتظر بدء الجولة القادمة لوضع الرهانات!");
+                    return;
+                }
+                const index = btn.getAttribute('data-index');
+                const betAmount = parseInt(customBetInput.value);
+
+                if (currentBets[index]) {
+                    delete currentBets[index];
+                    btn.classList.remove('active');
+                    btn.querySelector('.btn-bet-amount').innerText = '0';
+                    return;
+                }
+
+                if (Object.keys(currentBets).length >= 2) {
+                    alert("لا يمكنك اختيار أكثر من زرين في الجولة الواحدة!");
+                    return;
+                }
+
+                if (!betAmount || betAmount < GAME.MIN_BET) {
+                    alert(`يرجى إدخال مبلغ رهان صحيح (أدنى رهان ${GAME.MIN_BET})`);
+                    customBetInput.focus();
+                    return;
+                }
+
+                if (getTotalBet() + betAmount > currentUser.balance) {
+                    alert("رصيدك غير كافٍ لهذا الرهان!");
+                    return;
+                }
+
+                currentBets[index] = betAmount;
+                btn.classList.add('active');
+                btn.querySelector('.btn-bet-amount').innerText = betAmount;
+                customBetInput.value = '';
+            });
+        });
+
+        quickBetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                customBetInput.value = btn.getAttribute('data-amount');
+            });
+        });
+
+        function startNewRound() {
+            isRoundActive = true;
+            currentTime = GAME.ROUND_SECONDS;
+            resetButtons();
+            updateTimerDisplay(currentTime);
+            startBtn.innerText = "جاري اللعب...";
+            startBtn.disabled = true;
+            startBtn.style.opacity = "0.5";
+
+            timerInterval = setInterval(() => {
+                currentTime--;
+                updateTimerDisplay(currentTime);
+
+                if (currentTime === 10) {
+                    startBtn.innerText = "إعلان النتائج...";
+                    executeGameResult();
+                }
+
+                if (currentTime <= 0) {
+                    clearInterval(timerInterval);
+                    isRoundActive = false;
+                    startBtn.innerText = "START";
+                    startBtn.disabled = false;
+                    startBtn.style.opacity = "1";
+                    setTimeout(() => { startNewRound(); }, 2000);
+                }
+            }, 1000);
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (!isRoundActive) startNewRound();
+        });
+
+        async function executeGameResult() {
+            const totalBet = getTotalBet();
+            if (totalBet === 0) return; 
+
+            try {
+                const poolRef = ref(db, 'pool/balance');
+                const poolSnap = await get(poolRef);
+                let currentPool = poolSnap.exists() ? poolSnap.val() : 0;
+
+                const gameCut = totalBet * GAME.GAME_CUT;
+                const poolShare = totalBet * GAME.POOL_SHARE;
+                let newPoolBalance = currentPool + poolShare;
+                
+                await update(ref(db, 'admin_stats'), { totalGameProfit: gameCut });
+
+                let winningButton = null;
+                const selectedButtons = Object.keys(currentBets);
+                const randomSelectedIndex = selectedButtons[Math.floor(Math.random() * selectedButtons.length)];
+                const potentialWin = currentBets[randomSelectedIndex] * GAME.MULTIPLIER;
+
+                if (newPoolBalance >= potentialWin) {
+                    winningButton = parseInt(randomSelectedIndex);
+                    newPoolBalance -= potentialWin;
+                    currentUser.balance += potentialWin;
+                    alert(`🎉 مبروك! فزت بمبلغ ${potentialWin} ماسة.`);
+                } else {
+                    winningButton = Math.floor(Math.random() * 8) + 1;
+                    while (selectedButtons.includes(winningButton.toString())) {
+                        winningButton = Math.floor(Math.random() * 8) + 1;
+                    }
+                    alert(`❌ للأسف، الزر الفائز هو ${winningButton}.`);
+                }
+
+                await update(ref(db, 'pool'), { balance: newPoolBalance });
+
+                gameButtons.forEach(btn => {
+                    if (parseInt(btn.getAttribute('data-index')) === winningButton) {
+                        btn.style.boxShadow = "0 0 30px #fbbf24";
+                        btn.style.transform = "scale(1.1)";
+                    } else {
+                        btn.style.boxShadow = "none";
+                        btn.style.transform = "scale(1)";
+                    }
+                });
+
+            } catch (error) {
+                console.error("خطأ في تنفيذ نتيجة الجولة:", error);
+            }
+        }
+
+        userNameDisplay.innerText = currentUser.name;
+        userIdDisplay.innerText = "ID: " + currentUser.id;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            startNewRound();
+        });
+    </script>
 </body>
 </html>
