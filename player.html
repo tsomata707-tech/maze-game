@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة 7STAR | تسجيل الدخول واللعب</title>
+    <title>لعبة 7STAR</title>
     
-    <!-- تضمين خط Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     
-    <!-- ========================================== -->
-    <!-- 1. كود التصميم (CSS) المدمج -->
-    <!-- ========================================== -->
     <style>
         * {
             margin: 0;
@@ -27,25 +23,6 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-        }
-
-        /* الشعار (Logo) */
-        .logo-container {
-            text-align: center;
-            margin: 10px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 220px; /* تصغير عرض الحاوية */
-        }
-
-        .game-logo {
-            width: 100%;       
-            max-height: 120px; /* تصغير ارتفاع الصورة جداً لتبدو متناسقة */
-            object-fit: contain; 
-            border-radius: 12px;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)); 
         }
 
         /* الهيدر العلوي */
@@ -67,11 +44,6 @@
             gap: 8px;
         }
 
-        .avatar-wrapper {
-            position: relative;
-            cursor: pointer;
-        }
-
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -80,31 +52,9 @@
             object-fit: cover;
         }
 
-        .avatar-wrapper .edit-icon,
-        .name-wrapper .edit-icon {
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            background: #38bdf8;
-            color: #000;
-            border-radius: 50%;
-            width: 14px;
-            height: 14px;
-            font-size: 9px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .user-details {
             display: flex;
             flex-direction: column;
-        }
-
-        .name-wrapper {
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
         }
 
         .user-name {
@@ -147,83 +97,43 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        /* شاشة اللعب والعداد */
+        .logo-container {
+            text-align: center;
+            width: 100%;
+            max-width: 220px;
+        }
+
+        .game-logo {
+            width: 100%;       
+            max-height: 110px;
+            object-fit: contain; 
+            border-radius: 12px;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)); 
+        }
+
+        /* شاشة اللعب (العداد) */
         .game-screen {
             width: 100%;
-            max-width: 600px;
-            height: 130px;
+            max-width: 400px;
+            height: 100px;
             background: #1e293b;
             border-radius: 12px;
             border: 2px dashed #475569;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 5px;
         }
 
         .digital-timer {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 45px;
+            font-size: 50px;
             font-weight: 900;
             color: #38bdf8;
             text-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
-        }
-
-        /* أزرار التحكم */
-        .controls-area {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .quick-bets {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-oval {
-            padding: 6px 15px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: linear-gradient(135deg, #334155, #1e293b);
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.5);
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-            font-size: 13px;
-        }
-
-        .btn-start {
-            font-size: 18px;
-            padding: 10px 40px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6), inset 0 2px 5px rgba(255,255,255,0.4);
-            margin-top: 5px;
-        }
-
-        .custom-bet {
-            width: 100%;
-            max-width: 250px;
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: #fff;
-            font-size: 13px;
-            text-align: center;
         }
 
         /* الأزرار الثمانية */
@@ -233,47 +143,59 @@
             gap: 8px;
             width: 100%;
             max-width: 600px;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 400px) {
-            .game-buttons-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
         }
 
         .game-btn {
-            background: #ef4444;
+            background: #ef4444; /* أحمر */
             border-radius: 10px;
             padding: 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
         }
 
         .game-btn.active {
-            background: #10b981;
+            background: #10b981; /* أخضر */
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
         }
 
         .game-btn .btn-number {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             color: #fff;
-            margin-bottom: 3px;
         }
 
-        .game-btn .btn-bet-amount {
-            background: #fff;
-            color: #000;
-            border-radius: 20px;
-            padding: 1px 5px;
-            font-size: 11px;
+        .game-btn .btn-price {
+            font-size: 12px;
             font-weight: 700;
-            display: inline-block;
-            min-width: 25px;
+            color: #ffe4e6;
+            margin-top: 2px;
+        }
+
+        /* زر البدء */
+        .btn-start {
+            font-size: 18px;
+            padding: 12px 60px;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-start:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -281,15 +203,9 @@
 
     <header class="header">
         <div class="user-info">
-            <div class="avatar-wrapper" onclick="document.getElementById('avatarUpload').click()">
-                <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="Avatar" class="user-avatar" id="userAvatar">
-                <span class="edit-icon">✎</span>
-            </div>
-            
+            <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="Avatar" class="user-avatar">
             <div class="user-details">
-                <div class="name-wrapper">
-                    <span class="user-name" id="userName">اسم اللاعب</span>
-                </div>
+                <span class="user-name" id="userName">اسم اللاعب</span>
                 <span class="user-id" id="userId">ID: 123456</span>
             </div>
         </div>
@@ -308,42 +224,34 @@
             <img src="https://i.postimg.cc/rspqjjdL/1794453331407.jpg" alt="7STAR Logo" class="game-logo">
         </div>
 
+        <!-- شاشة اللعب والعداد -->
         <div class="game-screen">
             <div class="digital-timer" id="timerDisplay">25</div>
         </div>
 
-        <div class="controls-area">
-            <div class="quick-bets">
-                <button class="btn-oval quick-bet-btn" data-amount="50">50</button>
-                <button class="btn-oval quick-bet-btn" data-amount="200">200</button>
-                <button class="btn-oval quick-bet-btn" data-amount="500">500</button>
-                <button class="btn-oval quick-bet-btn" data-amount="1000">1000</button>
-            </div>
-            <input type="number" class="custom-bet" id="customBetInput" placeholder="أدخل مبلغ الرهان...">
-            <button class="btn-oval btn-start" id="startBtn">START</button>
+        <!-- الأزرار الثمانية مع الأسعار الثابتة -->
+        <div class="game-buttons-grid" id="gameButtonsGrid">
+            <!-- data-price هو السعر الثابت للزر -->
+            <div class="game-btn" data-index="1" data-price="10"><div class="btn-number">1</div><div class="btn-price">10</div></div>
+            <div class="game-btn" data-index="2" data-price="20"><div class="btn-number">2</div><div class="btn-price">20</div></div>
+            <div class="game-btn" data-index="3" data-price="30"><div class="btn-number">3</div><div class="btn-price">30</div></div>
+            <div class="game-btn" data-index="4" data-price="50"><div class="btn-number">4</div><div class="btn-price">50</div></div>
+            <div class="game-btn" data-index="5" data-price="100"><div class="btn-number">5</div><div class="btn-price">100</div></div>
+            <div class="game-btn" data-index="6" data-price="200"><div class="btn-number">6</div><div class="btn-price">200</div></div>
+            <div class="game-btn" data-index="7" data-price="500"><div class="btn-number">7</div><div class="btn-price">500</div></div>
+            <div class="game-btn" data-index="8" data-price="1000"><div class="btn-number">8</div><div class="btn-price">1000</div></div>
         </div>
 
-        <div class="game-buttons-grid" id="gameButtonsGrid">
-            <div class="game-btn" data-index="1"><div class="btn-number">1</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="2"><div class="btn-number">2</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="3"><div class="btn-number">3</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="4"><div class="btn-number">4</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="5"><div class="btn-number">5</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="6"><div class="btn-number">6</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="7"><div class="btn-number">7</div><div class="btn-bet-amount">0</div></div>
-            <div class="game-btn" data-index="8"><div class="btn-number">8</div><div class="btn-bet-amount">0</div></div>
-        </div>
+        <!-- زر البدء -->
+        <button class="btn-start" id="startBtn">START</button>
 
     </main>
 
-    <!-- ========================================== -->
-    <!-- 2. كود الجافاسكريبت ومنطق اللعبة (JS) المدمج -->
-    <!-- ========================================== -->
+    <!-- الجافاسكريبت -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
         import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-database.js";
 
-        // إعدادات Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyAp-tMO1n8SwnnWr1nXGIWpckALact9UYc",
             authDomain: "maze-game-7.firebaseapp.com",
@@ -361,164 +269,165 @@
             GAME_CUT: 0.25,
             POOL_SHARE: 0.75,
             MULTIPLIER: 2,
-            MIN_BET: 10,
             ROUND_SECONDS: 25,
         };
 
-        let currentUser = { id: "TEST123", name: "لاعب تجريبي", balance: 1000 };
-        let currentBets = {};
+        // اللاعب التجريبي (سنستبدله لاحقاً بنظام تسجيل الدخول)
+        let currentUser = { id: "TEST123", name: "لاعب تجريبي", balance: 2000 };
+        
+        let currentBets = {}; // لحفظ الرهانات { "1": 10, "4": 50 }
         let timerInterval = null;
         let currentTime = GAME.ROUND_SECONDS;
         let isRoundActive = false;
 
         const timerDisplay = document.getElementById('timerDisplay');
         const gameButtons = document.querySelectorAll('.game-btn');
-        const quickBetBtns = document.querySelectorAll('.quick-bet-btn');
-        const customBetInput = document.getElementById('customBetInput');
         const startBtn = document.getElementById('startBtn');
         const userNameDisplay = document.getElementById('userName');
         const userIdDisplay = document.getElementById('userId');
+
+        // عرض بيانات اللاعب
+        userNameDisplay.innerText = currentUser.name;
+        userIdDisplay.innerText = "ID: " + currentUser.id;
 
         function updateTimerDisplay(seconds) {
             timerDisplay.innerText = seconds;
             timerDisplay.style.color = (seconds <= 10 && isRoundActive) ? '#ef4444' : '#38bdf8';
         }
 
-        function resetButtons() {
+        function resetBets() {
             gameButtons.forEach(btn => {
                 btn.classList.remove('active');
-                btn.querySelector('.btn-bet-amount').innerText = '0';
-                btn.style.boxShadow = "none";
-                btn.style.transform = "scale(1)";
             });
             currentBets = {};
-            customBetInput.value = '';
+            startBtn.innerText = "START";
+            startBtn.disabled = false;
         }
 
-        function getTotalBet() {
-            return Object.values(currentBets).reduce((a, b) => a + b, 0);
-        }
-
+        // 1. التفاعل مع الأزرار (وضع الرهان)
         gameButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (!isRoundActive) {
-                    alert("انتظر بدء الجولة القادمة لوضع الرهانات!");
+                    alert("انتظر بدء الجولة القادمة!");
                     return;
                 }
-                const index = btn.getAttribute('data-index');
-                const betAmount = parseInt(customBetInput.value);
 
+                const index = btn.getAttribute('data-index');
+                const price = parseInt(btn.getAttribute('data-price'));
+
+                // إذا كان الزر مضغوطاً بالفعل، قم بإلغاء الرهان
                 if (currentBets[index]) {
                     delete currentBets[index];
                     btn.classList.remove('active');
-                    btn.querySelector('.btn-bet-amount').innerText = '0';
-                    return;
+                } else {
+                    // التحقق من الرصيد
+                    if (currentUser.balance < price) {
+                        alert("رصيدك غير كافٍ!");
+                        return;
+                    }
+                    
+                    // خصم الرصيد وإضافة الرهان
+                    currentUser.balance -= price;
+                    currentBets[index] = price;
+                    btn.classList.add('active');
                 }
-
-                if (Object.keys(currentBets).length >= 2) {
-                    alert("لا يمكنك اختيار أكثر من زرين في الجولة الواحدة!");
-                    return;
-                }
-
-                if (!betAmount || betAmount < GAME.MIN_BET) {
-                    alert(`يرجى إدخال مبلغ رهان صحيح (أدنى رهان ${GAME.MIN_BET})`);
-                    customBetInput.focus();
-                    return;
-                }
-
-                if (getTotalBet() + betAmount > currentUser.balance) {
-                    alert("رصيدك غير كافٍ لهذا الرهان!");
-                    return;
-                }
-
-                currentBets[index] = betAmount;
-                btn.classList.add('active');
-                btn.querySelector('.btn-bet-amount').innerText = betAmount;
-                customBetInput.value = '';
             });
         });
 
-        quickBetBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                customBetInput.value = btn.getAttribute('data-amount');
-            });
-        });
-
+        // 2. بدء الجولة
         function startNewRound() {
             isRoundActive = true;
             currentTime = GAME.ROUND_SECONDS;
-            resetButtons();
+            resetBets();
             updateTimerDisplay(currentTime);
+            
             startBtn.innerText = "جاري اللعب...";
             startBtn.disabled = true;
-            startBtn.style.opacity = "0.5";
 
             timerInterval = setInterval(() => {
                 currentTime--;
                 updateTimerDisplay(currentTime);
 
+                // عند الوصول لـ 10 ثواني (إعلان النتائج)
                 if (currentTime === 10) {
-                    startBtn.innerText = "إعلان النتائج...";
                     executeGameResult();
                 }
 
+                // عند انتهاء الجولة
                 if (currentTime <= 0) {
                     clearInterval(timerInterval);
                     isRoundActive = false;
-                    startBtn.innerText = "START";
-                    startBtn.disabled = false;
-                    startBtn.style.opacity = "1";
+                    // الانتقال للجولة التالية تلقائياً بعد ثانيتين
                     setTimeout(() => { startNewRound(); }, 2000);
                 }
             }, 1000);
         }
 
+        // زر البدء (إذا ضغط اللاعب START، يقفل الجولة فوراً لبدء الحساب)
         startBtn.addEventListener('click', () => {
-            if (!isRoundActive) startNewRound();
+            if (isRoundActive && Object.keys(currentBets).length > 0) {
+                // إذا كان هناك رهانات، نسرع العداد ليقفز للنتائج
+                currentTime = 11; 
+            }
         });
 
+        // 3. حساب النتائج عبر Firebase
         async function executeGameResult() {
-            const totalBet = getTotalBet();
-            if (totalBet === 0) return; 
+            const selectedButtons = Object.keys(currentBets);
+            
+            // إذا لم يضع اللاعب أي رهان، لا نفعل شيئاً
+            if (selectedButtons.length === 0) return; 
+
+            const totalBet = Object.values(currentBets).reduce((a, b) => a + b, 0);
 
             try {
                 const poolRef = ref(db, 'pool/balance');
                 const poolSnap = await get(poolRef);
                 let currentPool = poolSnap.exists() ? poolSnap.val() : 0;
 
+                // 1. توزيع الأرباح (25% للعبة، 75% للصندوق)
                 const gameCut = totalBet * GAME.GAME_CUT;
                 const poolShare = totalBet * GAME.POOL_SHARE;
                 let newPoolBalance = currentPool + poolShare;
                 
+                // تحديث أرباح اللعبة في فايربيس
                 await update(ref(db, 'admin_stats'), { totalGameProfit: gameCut });
 
+                // 2. تحديد الفائز
                 let winningButton = null;
-                const selectedButtons = Object.keys(currentBets);
+                
+                // نختار زر عشوائي من الأزرار التي راهن عليها اللاعب
                 const randomSelectedIndex = selectedButtons[Math.floor(Math.random() * selectedButtons.length)];
                 const potentialWin = currentBets[randomSelectedIndex] * GAME.MULTIPLIER;
 
+                // 3. التحقق من الصندوق (هل يكفي لدفع الجائزة؟)
                 if (newPoolBalance >= potentialWin) {
                     winningButton = parseInt(randomSelectedIndex);
                     newPoolBalance -= potentialWin;
-                    currentUser.balance += potentialWin;
-                    alert(`🎉 مبروك! فزت بمبلغ ${potentialWin} ماسة.`);
+                    currentUser.balance += potentialWin; // إعادة المكسب للرصيد
+                    alert(`🎉 مبروك! الزر ${winningButton} فاز. ربحت ${potentialWin} ماسة.`);
                 } else {
+                    // الصندوق لا يكفي -> النظام يختار زر لم يختره اللاعب
                     winningButton = Math.floor(Math.random() * 8) + 1;
                     while (selectedButtons.includes(winningButton.toString())) {
                         winningButton = Math.floor(Math.random() * 8) + 1;
                     }
-                    alert(`❌ للأسف، الزر الفائز هو ${winningButton}.`);
+                    alert(`❌ للأسف، الزر الفائز هو ${winningButton}. خسرت رهانك.`);
                 }
 
+                // تحديث رصيد الصندوق في Firebase
                 await update(ref(db, 'pool'), { balance: newPoolBalance });
 
+                // إظهار الزر الفائز (تأثير ذهبي)
                 gameButtons.forEach(btn => {
                     if (parseInt(btn.getAttribute('data-index')) === winningButton) {
                         btn.style.boxShadow = "0 0 30px #fbbf24";
                         btn.style.transform = "scale(1.1)";
+                        btn.style.zIndex = "10";
                     } else {
                         btn.style.boxShadow = "none";
                         btn.style.transform = "scale(1)";
+                        btn.style.zIndex = "1";
                     }
                 });
 
@@ -527,9 +436,7 @@
             }
         }
 
-        userNameDisplay.innerText = currentUser.name;
-        userIdDisplay.innerText = "ID: " + currentUser.id;
-
+        // بدء اللعبة تلقائياً عند فتح الصفحة
         document.addEventListener("DOMContentLoaded", () => {
             startNewRound();
         });
